@@ -5,19 +5,40 @@
         <title>Weather Journal App</title>
         <meta name="description" content="Weather journal that tracks both current weather and your mood!"/>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" href="/website/style.css">
+        <link rel="stylesheet" href="style.css">
 
         <!--add fonts here-->
     </head>
     <body>
-        <header>
-            <h1>Weather Journal App</h1>
-        </header>
-        <div>
-            main content
+        <div class="container">
+            <div class="sidebar">
+                <h1>Weather Journal App</h1>
+                <form id=app>
+                    <div class="formBody">
+                        <label class="formLabel">
+                            Zip Code:
+                            <input type="text" id="zip" placeholder="enter zip code here">
+                        </label>
+                        <label class="formLabel">Today's Mood and Thoughts:</label>
+                        <textarea id="feelings"></textarea>
+                    </div>
+                    <div class="formBtn">
+                        <button type="submit" class="btn" id="generate">Journal!</button>
+                    </div>
+                </form>
+            </div>
+            <div class="main">
+                <h2>Latest Post:</h2>
+                <div id="entryHolder">
+                    <div id="date"></div>
+                    <div id="temp"></div>
+                    <div id="content"></div>
+                </div>
+                <!--add a card for each input that the user makes-->
+                <!--dynamically add archived posts here each time a new post is added-->
+                <!--move previous latest post here-->
+                <div id="archivePosts"></div>
+            </div>
         </div>
-        <footer>
-            <!--add credits and links?? here-->
-        </footer>
     </body>
 </html>

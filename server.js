@@ -12,6 +12,7 @@ app.use(cors());
 //use body-parser (updated per https://knowledge.udacity.com/questions/509946 mentor response)
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
+app.use(express.static('website'));
 
 //create server
 const port = 8000;

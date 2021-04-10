@@ -1,0 +1,39 @@
+/*Default mobile view*/
+.container{
+    display: grid;
+    grid-template-columns: 300px 300px;
+    grid-auto-rows: minmax(200px, auto);
+    grid-template-areas:
+        "sd"
+        "main";
+}
+
+.sidebar{
+    grid-area:sd;
+    padding: 0 25px;
+    background-color: aqua;
+}
+
+.main{
+    grid-area: main;
+}
+
+/*Medium Sized Screen*/
+@media(min-width: 600px) and (max-width: 900px) {
+    .container{
+        display: grid;
+        grid-template-columns: 200px 200px 500px;
+        grid-auto-rows: minmax(200px, auto);
+        grid-template-areas: "sd sd main";
+    }
+}
+
+/*Large Sized Screen*/
+@media(min-width: 901px){
+    .container{
+        display: grid;
+        grid-template-columns: 200px 200px 500px;
+        grid-auto-rows: minmax(200px, auto);
+        grid-template-areas: "sd sd main";
+    }
+}

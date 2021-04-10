@@ -26,7 +26,7 @@ const server = app.listen(port, listening);
 app.get('', sendData);
 
 //POST
-app.post('/addEntry', addJournalData);
+app.post('/', addJournalData);
 
 //helper functions
 function listening() {
@@ -49,4 +49,5 @@ function addJournalData(req, res) {
 
     projectData.push(newJournalItem);
     console.log(projectData);
+    res.send('post request');
 }

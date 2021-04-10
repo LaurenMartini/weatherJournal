@@ -29,7 +29,7 @@ function addJournalItem(event) {
         const datePart = fullDate.toDateString();
         const timePart = fullDate.toLocaleString([],{hour: '2-digit', minute: '2-digit'});
         const comboDate = datePart + ' ' + timePart;
-        postJournalData('/addEntry', {temperature: temp, date: comboDate, userResponse: journalEntry});
+        postJournalData('/', {temperature: temp, date: comboDate, userResponse: journalEntry});
     });
 }
 
@@ -44,6 +44,8 @@ const getWeatherData = async(baseURL, zipCode, key) => {
 }
 
 const postJournalData = async(url, data) => {
+    console.log('url: ', url);
+    console.log('data: ', data);
     const res = await fetch(url, {
         method: 'POST',
         credentials: 'same-origin',

@@ -1,3 +1,6 @@
+//js object for API endpoint
+projectData = {};
+
 //require express, body-parser, and cors
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -19,8 +22,17 @@ const port = 8000;
 
 const server = app.listen(port, listening);
 
+//GET
+app.get('', sendData);
+
+//POST
+
 //helper functions
 function listening() {
     console.log('server running');
     console.log(`running on localhost: ${port}`);
+}
+
+function sendData(req, res) {
+    res.send(projectData);
 }

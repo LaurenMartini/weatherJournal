@@ -5,8 +5,27 @@
 //base url for the api call
 const baseURL = "api.openweathermap.org/data/2.5/weather";
 
-//country code will be for the US
-const countryCode = "us";
-
 //key for OpenWeatherMap
 const apiKey = "d8c0569efacca60538fd3c70f85fa060";
+
+//onclick for the generate/journal button
+document.getElementById('generate').addEventListener('click', addJournalItem);
+
+//helper functions
+function addJournalItem(event) {
+    const zipCode = document.getElementById('zip').value;
+    const journalEntry = document.getElementById('feelings').value;
+    console.log('zip code: ', zipCode);
+    console.log('journal entry: ', journalEntry);
+    getWeatherData(baseURL, zipCode, apiKey, journalEntry);
+}
+
+const getWeatherData = async(baseURL, zipCode, key, journalEntry) => {
+    const res = await fetch(baseURL + '?zip=' + zipCode + ',us&appid=' + key);
+    try {
+        const data = await res.json();
+        console.log(data);
+    } catch(error) {
+        console.log('error', error);
+    }
+}

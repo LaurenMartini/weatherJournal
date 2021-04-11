@@ -20,7 +20,6 @@ function addJournalItem(event) {
     console.log('journal entry: ', journalEntry);
     getWeatherData(baseURL, zipCode, apiKey).then(function(data) {
         //get the temperature to pass into the post request
-        console.log('temp from data: ', data.main.temp);
         const kelvinTemp = data.main.temp;
         const convertedTemp = (1.8 * (kelvinTemp - 273) + 32).toFixed(2);
         const temp = convertedTemp.toString() + ' F';
@@ -29,7 +28,7 @@ function addJournalItem(event) {
         const datePart = fullDate.toDateString();
         const timePart = fullDate.toLocaleString([],{hour: '2-digit', minute: '2-digit'});
         const comboDate = datePart + ' ' + timePart;
-        postJournalData('/add', {temperature: temp, date: comboDate, userResponse: journalEntry});
+        postJournalData('/add', {temperature: temp, date: comboDate, userResponse: journalEntry}).then(updateUI());
     });
 }
 
@@ -56,9 +55,60 @@ const postJournalData = async(url, data) => {
     });
 
     try{
+        console.log('in try');
         const resData = await res.json();
+        console.log('resData: ', resData);
         return resData;
     } catch(error) {
         console.log('error', error);
     }
+}
+
+const updateUI = async() => {
+    const req = await fetch('/all');
+    try {
+        const allData = await req.json();
+        //if there are previous posts, add the current latest to archive
+        if (document.getElementById('date').innerHTML != '') {
+            const dateElem = document.getElementById('date').innerHTML;
+            const tempElem = document.getElementById('temp').innerHTML;
+            const noteElem = document.getElementById('content').innerHTML;
+            buildCard(dateElem, tempElem, noteElem);
+            document.getElementById('archiveHeader').style.display = "block";
+        }
+        //add new data
+        document.getElementById('date').innerHTML = allData.date;
+        document.getElementById('temp').innerHTML = allData.temp;
+        document.getElementById('content').innerHTML = allData.userNote;
+    } catch (error) {
+        console.log('error', error);
+    }
+}
+
+function buildCard(dateVal, tempVal, noteVal) {
+    //parent container
+    const cardContainer = document.createElement('div');
+    cardContainer.setAttribute('class', 'card');
+
+    //children containers
+    const dateContainer = document.createElement('div');
+    const tempContainer = document.createElement('div');
+    const noteContainer = document.createElement('div');
+
+    //set child containers inner html and then store in card container
+    dateContainer.innerHTML = dateVal;
+    cardContainer.appendChild(dateContainer);
+
+    tempContainer.innerHTML = tempVal;
+    cardContainer.appendChild(tempContainer);
+
+    noteContainer.innerHTML = noteVal;
+    cardContainer.appendChild(noteContainer);
+
+    //create document fragment
+    const fragment = document.createDocumentFragment();
+    fragment.appendChild(cardContainer);
+
+    //insert that fragment at the top of the archive post section (make it first child)
+    document.getElementById('archivePosts').prepend(fragment);
 }

@@ -12,3 +12,5 @@ Files themselves written by Loryn (Lauren) Martini with reference to notes taken
 
 Credits
 AM/PM version of time: https://www.w3schools.com/code/tryit.asp?filename=FC47DLHGIVH6
+
+Huge thanks to Udacity mentors!

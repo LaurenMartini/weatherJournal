@@ -29,7 +29,7 @@ function addJournalItem(event) {
         const datePart = fullDate.toDateString();
         const timePart = fullDate.toLocaleString([],{hour: '2-digit', minute: '2-digit'});
         const comboDate = datePart + ' ' + timePart;
-        postJournalData('/', {temperature: temp, date: comboDate, userResponse: journalEntry});
+        postJournalData('/add', {temperature: temp, date: comboDate, userResponse: journalEntry});
     });
 }
 

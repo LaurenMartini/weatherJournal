@@ -23,10 +23,10 @@ const port = 8000;
 const server = app.listen(port, listening);
 
 //GET
-app.get('', sendData);
+app.get('/all', sendData);
 
 //POST
-app.post('/', addJournalData);
+app.post('/add', addJournalData);
 
 //helper functions
 function listening() {

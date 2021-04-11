@@ -57,7 +57,6 @@ const postJournalData = async(url, data) => {
 
     try{
         const resData = await res.json();
-        console.log(resData);
         return resData;
     } catch(error) {
         console.log('error', error);

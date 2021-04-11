@@ -39,15 +39,12 @@ function sendData(req, res) {
 }
 
 function addJournalData(req, res) {
-    console.log('req: ', req);
-    console.log('res: ', res);
     newJournalItem = {
         temp: req.body.temperature,
         date: req.body.date,
         userNote: req.body.userResponse
     }
 
-    projectData.push(newJournalItem);
-    console.log(projectData);
-    res.send('post request');
+    projectData = newJournalItem;
+    res.send(projectData);
 }

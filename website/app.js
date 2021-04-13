@@ -7,7 +7,7 @@
 const baseURL = "https://api.openweathermap.org/data/2.5/weather";
 
 //key for OpenWeatherMap
-const apiKey = "d8c0569efacca60538fd3c70f85fa060";
+const apiKey = "d8c0569efacca60538fd3c70f85fa060&units=imperial";
 
 //onclick for the generate/journal button
 document.getElementById('generate').addEventListener('click', addJournalItem);
@@ -20,9 +20,7 @@ function addJournalItem(event) {
     console.log('journal entry: ', journalEntry);
     getWeatherData(baseURL, zipCode, apiKey).then(function(data) {
         //get the temperature to pass into the post request
-        const kelvinTemp = data.main.temp;
-        const convertedTemp = (1.8 * (kelvinTemp - 273) + 32).toFixed(2);
-        const temp = convertedTemp.toString() + ' F';
+        const temp = data.main.temp.toString() + ' F';
         //get today's date
         const fullDate = new Date();
         const datePart = fullDate.toDateString();
